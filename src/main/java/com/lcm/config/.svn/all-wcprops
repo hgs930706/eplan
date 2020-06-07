@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/LCM_ePlanner/!svn/ver/950/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/config
+END
+SecurityConfiguration.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/LCM_ePlanner/!svn/ver/700/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/config/SecurityConfiguration.java
+END
+ApplicationProperties.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/LCM_ePlanner/!svn/ver/400/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/config/ApplicationProperties.java
+END
+WebConfigurer.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/LCM_ePlanner/!svn/ver/416/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/config/WebConfigurer.java
+END

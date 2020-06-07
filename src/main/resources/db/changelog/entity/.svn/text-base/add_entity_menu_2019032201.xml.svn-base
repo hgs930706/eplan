@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="C_SYS_MENU">
+                <column name="SITE" type="VARCHAR2(20)"></column>
+                <column name="PARENT_ID" type="VARCHAR2(30)"></column>
+                <column name="FUNCTION_ID" type="VARCHAR2(30)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="FUNCTION_NAME" type="VARCHAR2(50)"></column>
+                <column name="FUNCTION_PATH" type="VARCHAR2(200)"></column>
+                <column name="DISPLAY_SEQ" type="NUMBER"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+                <column name="ACTIVE_FLAG" type="VARCHAR2(1)"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

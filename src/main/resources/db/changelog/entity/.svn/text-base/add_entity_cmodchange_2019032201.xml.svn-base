@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="C_MOD_CHANGE">
+                <column name="SITE" type="VARCHAR2(20)"></column>
+                <column name="FAB" type="VARCHAR2(20)"></column>
+                <column name="LINE" type="VARCHAR2(20)"></column>
+                <column name="FROM_MODEL_SITE" type="VARCHAR2(20)"></column>
+                <column name="FROM_MODEL_TYPE" type="VARCHAR2(40)"></column>
+                <column name="FROM_PANEL_SIZE" type="VARCHAR2(20)"></column>
+                <column name="FROM_PART_LEVEL" type="VARCHAR2(20)"></column>
+                <column name="FROM_BAR_TYPE" type="VARCHAR2(10)"></column>
+                <column name="FROM_PANEL_SIZE_GROUP" type="VARCHAR2(10)"></column>
+                <column name="FROM_PARTS_GROUP" type="VARCHAR2(20)"></column>
+                <column name="FROM_IS_BUILD_PCB" type="VARCHAR2(1)"></column>
+                <column name="FROM_IS_DEMURA" type="VARCHAR2(1)"></column>
+                <column name="FROM_TUFFY_TYPE" type="VARCHAR2(1)"></column>
+                <column name="FROM_IS_OVER_SIX_MONTH" type="VARCHAR2(1)"></column>
+                <column name="TO_MODEL_SITE" type="VARCHAR2(20)"></column>
+                <column name="TO_MODEL_TYPE" type="VARCHAR2(40)"></column>
+                <column name="TO_PANEL_SIZE" type="VARCHAR2(20)"></column>
+                <column name="TO_PART_LEVEL" type="VARCHAR2(20)"></column>
+                <column name="TO_BAR_TYPE" type="VARCHAR2(10)"></column>
+                <column name="TO_PANEL_SIZE_GROUP" type="VARCHAR2(10)"></column>
+                <column name="TO_PARTS_GROUP" type="VARCHAR2(20)"></column>
+                <column name="TO_IS_BUILD_PCB" type="VARCHAR2(1)"></column>
+                <column name="TO_IS_DEMURA" type="VARCHAR2(1)"></column>
+                <column name="TO_TUFFY_TYPE" type="VARCHAR2(1)"></column>
+                <column name="TO_IS_OVER_SIX_MONTH" type="VARCHAR2(1)"></column>
+                <column name="CHANGE_KEY" type="VARCHAR2(30)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="CHANGE_LEVEL" type="VARCHAR2(10)"></column>
+                <column name="CHANGE_DURATION" type="NUMBER"></column>
+                <column name="AFFECT_CAPA_PERCENT_1" type="NUMBER" defaultValue="1"></column>
+                <column name="AFFECT_CAPA_QTY_1" type="NUMBER" defaultValue="0"></column>
+                <column name="AFFECT_CAPA_PERCENT_2" type="NUMBER" defaultValue="1"></column>
+                <column name="AFFECT_CAPA_QTY_2" type="NUMBER" defaultValue="0"></column>
+                <column name="AFFECT_CAPA_PERCENT_3" type="NUMBER" defaultValue="1"></column>
+                <column name="AFFECT_CAPA_QTY_3" type="NUMBER" defaultValue="0"></column>
+                <column name="AFFECT_CAPA_PERCENT_4" type="NUMBER" defaultValue="1"></column>
+                <column name="AFFECT_CAPA_QTY_4" type="NUMBER" defaultValue="0"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+                <column name="PRIORITY" type="NUMBER"></column>
+                <column name="FROM_PART_NO" type="VARCHAR2(40)"></column>
+                <column name="TO_PART_NO" type="VARCHAR2(40)"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

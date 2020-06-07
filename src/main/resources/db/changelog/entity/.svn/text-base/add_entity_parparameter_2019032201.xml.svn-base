@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="P_PAR_PARAMETER">
+                <column name="SITE" type="VARCHAR2(20)"></column>
+                <column name="FAB" type="VARCHAR2(20)"></column>
+                <column name="ITEM_NAME" type="VARCHAR2(40)"></column>
+                <column name="IN_VALUE1" type="VARCHAR2(40)"></column>
+                <column name="IN_VALUE2" type="VARCHAR2(40)"></column>
+                <column name="IN_VALUE3" type="VARCHAR2(40)"></column>
+                <column name="IN_VALUE4" type="VARCHAR2(40)"></column>
+                <column name="REMARK" type="VARCHAR2(300)"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+                <column name="ITEM_SEQ" type="NUMBER">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

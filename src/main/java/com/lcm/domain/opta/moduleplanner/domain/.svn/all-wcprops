@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/LCM_ePlanner/!svn/ver/928/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain
+END
+ShiftType.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/LCM_ePlanner/!svn/ver/146/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/ShiftType.java
+END
+Model.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/LCM_ePlanner/!svn/ver/727/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/Model.java
+END
+Setup.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/LCM_ePlanner/!svn/ver/146/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/Setup.java
+END
+AbstractPersistable.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/LCM_ePlanner/!svn/ver/146/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/AbstractPersistable.java
+END
+Standstill.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/LCM_ePlanner/!svn/ver/146/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/Standstill.java
+END
+PlanLine.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/LCM_ePlanner/!svn/ver/928/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/PlanLine.java
+END
+Capa.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/LCM_ePlanner/!svn/ver/891/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/Capa.java
+END
+TaskAssignmentSolution.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/svn/LCM_ePlanner/!svn/ver/811/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/TaskAssignmentSolution.java
+END
+AppData.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/LCM_ePlanner/!svn/ver/891/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/AppData.java
+END
+Job.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/LCM_ePlanner/!svn/ver/926/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/Job.java
+END
+TimeWindowedJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/LCM_ePlanner/!svn/ver/891/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/TimeWindowedJob.java
+END
+ShiftDate.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/LCM_ePlanner/!svn/ver/146/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/ShiftDate.java
+END
+Shift.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/LCM_ePlanner/!svn/ver/668/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/domain/Shift.java
+END

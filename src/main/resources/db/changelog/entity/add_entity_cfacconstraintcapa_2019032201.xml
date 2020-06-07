@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="C_FAC_CONSTRAINT_CAPA">
+                <column name="SITE" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="FAB" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="SHIFT_DATE" type="DATE">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="SHIFT" type="VARCHAR2(1)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="SCORE_ITEM" type="VARCHAR2(50)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="ITEM_VALUE" type="NUMBER"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

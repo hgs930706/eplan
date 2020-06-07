@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+  <moveThreadCount>AUTO</moveThreadCount>
+  <!-- <environmentMode>FULL_ASSERT</environmentMode> -->
+  <!-- <environmentMode>FAST_ASSERT</environmentMode> --> 
+  
+  <!-- Domain model configuration -->
+  <solutionClass>com.lcm.domain.opta.moduleplanner.domain.TaskAssignmentSolution</solutionClass>
+  <entityClass>com.lcm.domain.opta.moduleplanner.domain.Standstill</entityClass>
+  <entityClass>com.lcm.domain.opta.moduleplanner.domain.Job</entityClass>
+  <entityClass>com.lcm.domain.opta.moduleplanner.domain.TimeWindowedJob</entityClass>
+
+
+ <scoreDirectorFactory>
+    <!-- <easyScoreCalculatorClass>com.lcm.domain.opta.moduleplanner.solver.score.TaskEasyScoreCalculator</easyScoreCalculatorClass> -->
+    <!--<incrementalScoreCalculatorClass>org.optaplanner.examples.vehiclerouting.solver.score.VehicleRoutingIncrementalScoreCalculator</incrementalScoreCalculatorClass>-->
+    <scoreDrl>com/lcm/opta/moduleplanner/taskAssignmentDools.drl</scoreDrl>
+    <!--<assertionScoreDirectorFactory>-->
+      <!--<easyScoreCalculatorClass>org.optaplanner.examples.vehiclerouting.solver.score.VehicleRoutingEasyScoreCalculator</easyScoreCalculatorClass>-->
+    <!--</assertionScoreDirectorFactory>-->
+    <initializingScoreTrend>ONLY_DOWN/ONLY_DOWN/ONLY_DOWN</initializingScoreTrend>
+  </scoreDirectorFactory>
+
+  <termination>
+    <secondsSpentLimit>100</secondsSpentLimit>
+  </termination>  
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic>
+<localSearch>
+<!-- 
+     <changeMoveSelector>
+      <selectionOrder>SORTED</selectionOrder>
+    </changeMoveSelector>
+     <acceptor>
+      <entityTabuSize>5</entityTabuSize>
+    </acceptor>
+    <forager>
+      Real world problems require use of <acceptedCountLimit>
+    </forager> 
+     
+    <unionMoveSelector>
+      <changeMoveSelector/>
+      <swapMoveSelector/>
+      <subChainChangeMoveSelector>
+        <selectReversingMoveToo>true</selectReversingMoveToo>
+      </subChainChangeMoveSelector>
+      <subChainSwapMoveSelector>
+        <selectReversingMoveToo>true</selectReversingMoveToo>
+      </subChainSwapMoveSelector>
+      TODO use nearby selection to scale out
+    </unionMoveSelector>
+    <acceptor>
+      <lateAcceptanceSize>200</lateAcceptanceSize>
+    </acceptor>
+    <forager>
+      <acceptedCountLimit>1</acceptedCountLimit>
+    </forager>
+-->
+
+   <acceptor>
+    	<simulatedAnnealingStartingTemperature>[0]hard/[1000/0]soft</simulatedAnnealingStartingTemperature>    	
+    </acceptor>
+    <forager>
+        <acceptedCountLimit>4</acceptedCountLimit>
+    </forager>
+       <!-- 
+  	 <acceptor>
+	 	<entityTabuSize>7</entityTabuSize>
+	 </acceptor>  	
+	 <forager>
+	 	<acceptedCountLimit>4</acceptedCountLimit>
+	</forager> 
+	
+	<termination>
+      <unimprovedSecondsSpentLimit>200</unimprovedSecondsSpentLimit>
+    </termination> 
+	 -->
+ 
+       
+  </localSearch> 
+
+
+</solver>

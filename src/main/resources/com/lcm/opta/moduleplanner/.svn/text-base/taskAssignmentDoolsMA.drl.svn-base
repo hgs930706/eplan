@@ -1,0 +1,131 @@
+package com.lcm.opta.moduleplanner;
+
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Iterator;
+
+import com.lcm.domain.opta.moduleplanner.domain.TimeWindowedJob;
+import com.lcm.domain.SJobDashboard;
+import com.lcm.domain.opta.moduleplanner.solver.score.SJobDashboardKey;
+import com.lcm.domain.opta.moduleplanner.utility.ModulePlannerUtility;
+
+import org.optaplanner.core.api.score.buildin.hardsoftbigdecimal.HardSoftBigDecimalScore;
+import org.optaplanner.core.api.score.buildin.hardsoftbigdecimal.HardSoftBigDecimalScoreHolder;
+import org.optaplanner.core.api.score.buildin.bendable.BendableScore;
+import org.optaplanner.core.api.score.buildin.bendable.BendableScoreHolder;
+
+global BendableScoreHolder scoreHolder;
+
+rule "RuleSetUp0"
+    salience 4
+    when
+    	$mapParam : Map(this["is_map_param"] != null)
+    	$job : TimeWindowedJob(previousStandstill != null)
+    then
+    	List<SJobDashboard> tmpList = ModulePlannerUtility.splitByShift($job, $mapParam, false);
+		for(SJobDashboard sJob : tmpList){
+	        insertLogical(sJob);
+		}
+end
+
+rule "RuleSetUp1"
+    salience 3
+    when
+    	SJobDashboard(jobType not in ("PM","NON-SCHEDULE") , $site : site, $fab : fab, $shiftDate : shiftDate, $shift : shift, $changeShift : changeShift, $changeShiftDate : changeShiftDate)
+    then
+    	insertLogical(new SJobDashboardKey($site, $fab, $shiftDate, $shift));
+    	insertLogical(new SJobDashboardKey($site, $fab, $changeShift, $changeShiftDate));
+end 
+
+rule "SPLPriority"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		SJobDashboard(jobType == "SPL", 
+			(changeDuration == 0 && (!assignShiftDate.equals(shiftDate) || !assignShift.equals(shift))) 
+				|| (changeDuration > 0 && (!assignShiftDate.equals(changeShiftDate) || !assignShift.equals(changeShift))),
+			$assignStartTime : getAssignStartTime(),
+			$processStartTime : processStartTime,
+			$changeDuration : changeDuration
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("SPLPriority"), 
+	    	((Map<String, Integer>)$mapWeight).get("SPLPriority") * (int)-Math.abs((Duration.between($assignStartTime, $processStartTime).toHours() - $changeDuration)));
+end 
+
+
+rule "ENGPriority"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		SJobDashboard(jobType == "ENG", 
+			(changeDuration == 0 && (!assignShiftDate.equals(shiftDate) || !assignShift.equals(shift))) 
+				|| (changeDuration > 0 && (!assignShiftDate.equals(changeShiftDate) || !assignShift.equals(changeShift))),
+			$assignStartTime : getAssignStartTime(),
+			$processStartTime : processStartTime,
+			$changeDuration : changeDuration
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("ENGPriority"), 
+	    	((Map<String, Integer>)$mapWeight).get("ENGPriority") * (int)-Math.abs((Duration.between($assignStartTime, $processStartTime).toHours() - $changeDuration)));
+end 
+
+rule "PMPriority"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		TimeWindowedJob(previousStandstill != null, line != null, startTime != null, jobType in ("PM","NON-SCHEDULE") , $startTime: getStartTime().doubleValue(), $assignStartTime : getAssignStartTime())
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("PMPriority"), 
+	    	((Map<String, Integer>)$mapWeight).get("PMPriority") * (int)-Math.abs($assignStartTime- $startTime));
+end
+
+rule "AccumulateSetupTime"
+	when
+    	Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+        TimeWindowedJob(previousStandstill != null, ((Float)getSetupDurationFromPreviousStandstill().get("CHANGE_DURATION")).intValue() > 0, $changeDuration : ((Float)getSetupDurationFromPreviousStandstill().get("CHANGE_DURATION")).intValue())
+        //TimeWindowedJob(previousStandstill != null, ((Float)getChangeDuration()).intValue() > 0, $changeDuration : ((Float)getChangeDuration()).intValue())
+    then
+    	scoreHolder.addSoftConstraintMatch(kcontext,
+	    	((Map<String, Integer>)$mapLevel).get("AccumulateSetupTime"), 
+	    	((Map<String, Integer>)$mapWeight).get("AccumulateSetupTime") * -$changeDuration);
+end
+
+rule "MinMakespan"
+    when
+        Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+        TimeWindowedJob(previousStandstill != null, line != null, nextJob == null, $endTime : endTime)
+    then
+        // Fairness and load balancing trick (see docs): squared to assure correctness in corner cases
+        scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("MinMakespan"), 
+	    	((Map<String, Integer>)$mapWeight).get("MinMakespan") * -(int)$endTime);
+end
+
+
+rule "AccumulateWaittoLogon"
+	when
+    	Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+        //MA Start Time - MA Ready Time
+        TimeWindowedJob(getStartTime()!=null, $subTime : new BigDecimal((getStartTime() - getReadyTime())).intValue())
+    then
+    	scoreHolder.addSoftConstraintMatch(kcontext,
+	    	((Map<String, Integer>)$mapLevel).get("AccumulateWaittoLogon"), 
+	    	((Map<String, Integer>)$mapWeight).get("AccumulateWaittoLogon") * -$subTime);
+	    	
+end
+
+rule "AccumulateManpowerKilo"
+	when
+    	Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+        TimeWindowedJob(getManpowerKilo()!=null, ((Double)getManpowerKilo()).intValue() > 0, $manpower : ((Double)getManpowerKilo()).intValue())
+    then
+    	scoreHolder.addSoftConstraintMatch(kcontext,
+	    	((Map<String, Integer>)$mapLevel).get("AccumulateManpowerKilo"), 
+	    	((Map<String, Integer>)$mapWeight).get("AccumulateManpowerKilo") * -$manpower);
+end

@@ -1,0 +1,6 @@
+#===== Notice: Do Not Modify By Manual =====
+#Thu Feb 21 08:20:41 CST 2008
+#UAC.Server=[{"active"\:true,"server"\:"10.88.19.125","port"\:7102,"proxy"\:"","ssl"\:false}]
+UAC.Server=[{"active"\:false,"server"\:"10.5.15.228","port"\:7102,"ssl"\:false,"proxy"\:""},{"active"\:false,"server"\:"10.5.15.229","port"\:7102,"ssl"\:false,"proxy"\:""},{"active"\:true,"server"\:"10.5.13.183","port"\:7102,"ssl"\:false,"proxy"\:""}]
+UAC.WSTimeOut=10
+UAC.Proxy={"host"\:"", "port"\:8080}

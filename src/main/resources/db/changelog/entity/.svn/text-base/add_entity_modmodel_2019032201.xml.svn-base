@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="C_MOD_MODEL">
+                <column name="SITE" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="PART_NO" type="VARCHAR2(40)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="MODEL_NO" type="VARCHAR2(40)"></column>
+                <column name="MODEL_SITE" type="VARCHAR2(20)"></column>
+                <column name="MODEL_TYPE" type="VARCHAR2(40)"></column>
+                <column name="MODEL_EXT" type="VARCHAR2(10)"></column>
+                <column name="MODEL_VER" type="VARCHAR2(20)"></column>
+                <column name="PANEL_SIZE" type="VARCHAR2(20)"></column>
+                <column name="BAR_TYPE" type="VARCHAR2(10)"></column>
+                <column name="PANEL_SIZE_GROUP" type="VARCHAR2(10)"></column>
+                <column name="PARTS_GROUP" type="VARCHAR2(20)"></column>
+                <column name="IS_BUILD_PCB" type="VARCHAR2(1)"></column>
+                <column name="IS_DEMURA" type="VARCHAR2(1)"></column>
+                <column name="TUFFY_TYPE" type="VARCHAR2(1)"></column>
+                <column name="LAST_TRACKOUT_TIME" type="DATE"></column>
+                <column name="COLOR" type="VARCHAR2(10)"></column>
+                <column name="PRIORITY" type="VARCHAR2(10)"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

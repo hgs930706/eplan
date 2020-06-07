@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="S_JOB_DASHBOARD">
+                <column name="SITE" type="VARCHAR2(20)"></column>
+                <column name="FAB" type="VARCHAR2(20)"></column>
+                <column name="LINE" type="VARCHAR2(20)"></column>
+                <column name="JOB_ID" type="VARCHAR2(50)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="SHIFT_DATE" type="DATE"></column>
+                <column name="SHIFT" type="VARCHAR2(1)"></column>
+                <column name="JOB_TYPE" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="WO_ID" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="PART_NO" type="VARCHAR2(40)"></column>
+                <column name="MODEL_NO" type="VARCHAR2(40)"></column>
+                <column name="PLAN_QTY" type="NUMBER"></column>
+                <column name="PROCESS_START_TIME" type="DATE"></column>
+                <column name="PROCESS_END_TIME" type="DATE"></column>
+                <column name="CHANGE_LEVEL" type="VARCHAR2(20)"></column>
+                <column name="CHANGE_DURATION" type="NUMBER"></column>
+                <column name="CHANGE_START_TIME" type="DATE"></column>
+                <column name="CHANGE_END_TIME" type="DATE"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+                <column name="ASSIGN_SHIFT_DATE" type="DATE"></column>
+                <column name="ASSIGN_SHIFT" type="VARCHAR2(1)"></column>
+                <column name="FORECAST_QTY" type="NUMBER"></column>
+                <column name="CHANGE_SHIFT_DATE" type="DATE"></column>
+                <column name="CHANGE_SHIFT" type="VARCHAR2(1)"></column>
+                <column name="CHANGE_KEY" type="VARCHAR2(30)"></column>
+                <column name="TRX_ID" type="VARCHAR2(50)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="PLAN_START_DATE" type="DATE"></column>
+                <column name="PLAN_END_DATE" type="DATE"></column>
+                <column name="JOB_QTY" type="NUMBER"></column>
+                <column name="SHIFT_COUNT_AFTER_CHANGE" type="NUMBER"></column>
+                <column name="AFFECT_CAPA_PERCENT" type="NUMBER"></column>
+                <column name="AFFECT_CAPA_QTY" type="NUMBER"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

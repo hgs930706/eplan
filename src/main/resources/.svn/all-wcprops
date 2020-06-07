@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/LCM_ePlanner/!svn/ver/952/LCMePlannerWeb/trunk/ePlanner/src/main/resources
+END
+application-dev.yml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/LCM_ePlanner/!svn/ver/950/LCMePlannerWeb/trunk/ePlanner/src/main/resources/application-dev.yml
+END
+application.yml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/LCM_ePlanner/!svn/ver/952/LCMePlannerWeb/trunk/ePlanner/src/main/resources/application.yml
+END
+application-prod.yml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/resources/application-prod.yml
+END

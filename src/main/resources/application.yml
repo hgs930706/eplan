@@ -1,0 +1,44 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active:
+      - dev
+  servlet:
+    multipart:
+      max-file-size:
+        20MB
+      max-request-size:
+        40MB
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size:
+            50
+          fetch_size: 
+            100
+  datasource:
+    auto-commit: false
+
+application:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    exposed-headers: "Authorization,Link,X-Total-Count"
+    allow-credentials: true
+    max-age: 1800
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+        base64-secret: MWY1YmEyN2EwYjIzZGNiYTA3ZjRkNWNiMDJlZmYzNTUyNDRhMjQ2MDYxZmQ0Yzg1ZTIzZDcwNTEzOGFiMDFlMjdlMjU0ODdiYmExOWM4MmEwNWM2NzE2MzVhNWMzMGFiZDEwZjk2YjVkYjZmMDRjODg2NGE3MDE5N2FhNWI0Mjk=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+uac:
+#  path: /u01/eplan/uac
+  path: D:/All_springBoot_Project/eplaner/src/main/resources/uac

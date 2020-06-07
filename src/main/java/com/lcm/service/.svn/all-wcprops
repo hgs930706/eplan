@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/LCM_ePlanner/!svn/ver/954/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service
+END
+AdjustmentService.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/LCM_ePlanner/!svn/ver/954/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/AdjustmentService.java
+END
+FacCapaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/FacCapaService.java
+END
+AppService.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/LCM_ePlanner/!svn/ver/943/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/AppService.java
+END
+SpecialService.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/SpecialService.java
+END
+JobDashboardService.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/JobDashboardService.java
+END
+ParParameterService.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/LCM_ePlanner/!svn/ver/686/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/ParParameterService.java
+END
+ModChangeService.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/LCM_ePlanner/!svn/ver/943/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/ModChangeService.java
+END
+SJobScoreService.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/SJobScoreService.java
+END
+PlanService.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/PlanService.java
+END
+ModModelService.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/LCM_ePlanner/!svn/ver/647/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/ModModelService.java
+END
+AdjustmentInitServcie.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/LCM_ePlanner/!svn/ver/797/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/AdjustmentInitServcie.java
+END
+PlanMatchReportService.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/PlanMatchReportService.java
+END
+EqpCapaService.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/EqpCapaService.java
+END
+ReportService.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/LCM_ePlanner/!svn/ver/692/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/ReportService.java
+END
+PmService.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/LCM_ePlanner/!svn/ver/940/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/PmService.java
+END

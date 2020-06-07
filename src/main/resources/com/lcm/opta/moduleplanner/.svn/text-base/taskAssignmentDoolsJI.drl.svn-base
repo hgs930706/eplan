@@ -1,0 +1,311 @@
+package com.lcm.opta.moduleplanner;
+
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Iterator;
+
+import org.optaplanner.core.api.score.buildin.hardsoftbigdecimal.HardSoftBigDecimalScore;
+import org.optaplanner.core.api.score.buildin.hardsoftbigdecimal.HardSoftBigDecimalScoreHolder;
+import org.optaplanner.core.api.score.buildin.bendable.BendableScore;
+import org.optaplanner.core.api.score.buildin.bendable.BendableScoreHolder;
+import com.lcm.domain.CFacConstraintCapa;
+import com.lcm.domain.SJobDashboard;
+import com.lcm.domain.opta.moduleplanner.domain.Job;
+import com.lcm.domain.opta.moduleplanner.domain.PlanLine;
+import com.lcm.domain.opta.moduleplanner.domain.TaskAssignmentSolution;
+import com.lcm.domain.opta.moduleplanner.domain.Model;
+import com.lcm.domain.opta.moduleplanner.domain.TimeWindowedJob;
+import com.lcm.domain.opta.moduleplanner.solver.score.SJobDashboardKey;
+import com.lcm.domain.opta.moduleplanner.utility.ModulePlannerUtility;
+
+global BendableScoreHolder scoreHolder;
+
+rule "RuleSetUp0"
+    salience 4
+    when
+    	$mapParam : Map(this["is_map_param"] != null, $justSplitSjob : this["just_split_sjob"])
+    	$job : TimeWindowedJob(previousStandstill != null)
+    then
+    	List<SJobDashboard> tmpList = ModulePlannerUtility.splitByShift($job, $mapParam, false);
+		for(SJobDashboard sJob : tmpList){
+	        insertLogical(sJob);
+		}
+end
+
+/*
+rule "RuleSetUp0"
+    salience 4
+    when
+        $mapParam : Map(this["is_map_param"] != null)
+    	$job : TimeWindowedJob(previousStandstill != null)
+    then
+		List<SJobDashboard> tmpList = ModulePlannerUtility.splitByShift($job, $mapParam);
+		for(SJobDashboard sJob : tmpList){
+	        insertLogical(sJob);
+		}
+end
+*/
+
+rule "RuleSetUp1"
+    salience 3
+    when
+    	SJobDashboard(jobType not in ("PM","NON-SCHEDULE") , $site : site, $fab : fab, $shiftDate : shiftDate, $shift : shift, $changeShift : changeShift, $changeShiftDate : changeShiftDate)
+    then
+    	insertLogical(new SJobDashboardKey($site, $fab, $shiftDate, $shift));
+    	insertLogical(new SJobDashboardKey($site, $fab, $changeShift, $changeShiftDate));
+end 
+
+rule "RuleSetUp2"
+    salience 2
+    when
+        $mapParam : Map(this["is_map_param"] != null, $mapSite : this["site"])
+    	$sJobList : ArrayList() from collect(SJobDashboard())
+    	$lineList : List() from collect(PlanLine())
+    then
+    	Map mapOpenLine = ModulePlannerUtility.calcOpenLine($sJobList, $mapParam);
+        Map mapChange = ModulePlannerUtility.calcChangeLimitBySite($mapParam, $sJobList, ((Map<String, String>)$mapSite).get("in_value1"), $lineList);
+        insertLogical(mapOpenLine);
+        insertLogical(mapChange);        
+end
+ 
+/* //mark by avonchung 20190614
+rule "LineCost"
+    when
+        Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+        $line : PlanLine()
+        exists TimeWindowedJob(line == $line)
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("LineCost"), 
+	    	((Map<String, Integer>)$mapWeight).get("LineCost") * -1);
+end
+
+rule "AssignLine"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+    	TimeWindowedJob(previousStandstill != null, line != assignLine)
+    then
+    	scoreHolder.addHardConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("AssignLine"), 
+	    	((Map<String, Integer>)$mapWeight).get("AssignLine") * -1);
+end
+*/
+
+rule "EndAfterDueTime"
+	when
+    	Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])        
+        TimeWindowedJob(previousStandstill != null, dueTime < getEndTime(), $dueTime : dueTime, $endTime : getEndTime())
+    then
+    	scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("EndAfterDueTime"), 
+	    	((Map<String, Integer>)$mapWeight).get("EndAfterDueTime") * (int)($dueTime - $endTime));
+end
+
+
+rule "SameDayChange"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		SJobDashboardKey(changeShiftDate != null,  $site : site, $fab : fab, $changeShiftDate : changeShiftDate, $changeShift : changeShift)
+		$sJobList : ArrayList() from collect(SJobDashboard(changeShiftDate != null, changeDuration > 0, site == $site, fab == $fab, changeShiftDate.equals($changeShiftDate), changeShift == $changeShift))
+	then
+		int S023EJI01 = 0;
+		int S023EJI02 = 0;
+		int S022EJI06 = 0;
+		int S022EJI07 = 0;
+		int hour0102 = 0;
+		int hour0607 = 0;
+		int rtnValue = 0;
+		for(int i = 0; i < $sJobList.size(); i++){
+			SJobDashboard sJob = (SJobDashboard) $sJobList.get(i);
+			if("S02".equals(sJob.getSite()) && "3E".equals(sJob.getFab()) ) {
+				if ("S023EJI01".equals(sJob.getLine())){
+				    S023EJI01 +=1;
+				    hour0102 += sJob.getChangeDuration() ;
+				}else if ("S023EJI02".equals(sJob.getLine())){
+				    S023EJI02 +=1;
+				    hour0102 += sJob.getChangeDuration() ;
+				}
+			}else if("S02".equals(sJob.getSite()) && "2E".equals(sJob.getFab())){
+				if ("S022EJI06".equals(sJob.getLine())){
+				    S022EJI06 +=1;
+				    hour0607 += sJob.getChangeDuration() ;
+				}else if ("S022EJI07".equals(sJob.getLine())){
+				    S022EJI07 +=1;
+				    hour0607 += sJob.getChangeDuration() ;
+				}
+			}
+		}
+		if(S023EJI01 >1 && S023EJI02 >1 ){
+			rtnValue -=hour0102;
+		}
+		if(S022EJI06 >1 && S022EJI07 >1 ){
+			rtnValue -=hour0607;
+		}
+		
+		if(rtnValue < 0) {
+			scoreHolder.addSoftConstraintMatch(kcontext, 
+		    	((Map<String, Integer>)$mapLevel).get("SameDayChange"), 
+		    	((Map<String, Integer>)$mapWeight).get("SameDayChange") * rtnValue);
+		}
+end 
+
+/*//mark by avonchung 2019006
+rule "CrossChange"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		//SJobDashboard(jobType not in ("PM","NON-SCHEDULE") , changeStartTime != null, changeStartShiftType() != changeEndShiftType(), $changeDuration: changeDuration, changeDuration <= 12)
+		TimeWindowedJob(jobType not in ("PM","NON-SCHEDULE") , previousStandstill != null, changeStartShiftType() != changeEndShiftType(), $changeDuration : ((Long)getSetupDurationFromPreviousStandstill().get("CHANGE_DURATION")).intValue(), $changeDuration <= 12)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("CrossChange"), 
+	    	((Map<String, Integer>)$mapWeight).get("CrossChange") * -$changeDuration);
+end
+*/
+
+rule "SPLPriority"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		SJobDashboard(jobType == "SPL", 
+			(changeDuration == 0 && (!assignShiftDate.equals(shiftDate) || !assignShift.equals(shift))) 
+				|| (changeDuration > 0 && (!assignShiftDate.equals(changeShiftDate) || !assignShift.equals(changeShift))),
+			$assignStartTime : getAssignStartTime(),
+			$processStartTime : processStartTime,
+			$changeDuration : changeDuration
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("SPLPriority"), 
+	    	((Map<String, Integer>)$mapWeight).get("SPLPriority") * (int)-Math.abs((Duration.between($assignStartTime, $processStartTime).toHours() - $changeDuration)));
+end 
+
+
+rule "ENGPriority"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		SJobDashboard(jobType == "ENG", 
+			(changeDuration == 0 && (!assignShiftDate.equals(shiftDate) || !assignShift.equals(shift))) 
+				|| (changeDuration > 0 && (!assignShiftDate.equals(changeShiftDate) || !assignShift.equals(changeShift))),
+			$assignStartTime : getAssignStartTime(),
+			$processStartTime : processStartTime,
+			$changeDuration : changeDuration
+		)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("ENGPriority"), 
+	    	((Map<String, Integer>)$mapWeight).get("ENGPriority") * (int)-Math.abs((Duration.between($assignStartTime, $processStartTime).toHours() - $changeDuration)));
+end 
+
+rule "PMPriority"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		TimeWindowedJob(previousStandstill != null, line != null, startTime != null, jobType in ("PM","NON-SCHEDULE") , $startTime: getStartTime().doubleValue(), $assignStartTime : getAssignStartTime())
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("PMPriority"), 
+	    	((Map<String, Integer>)$mapWeight).get("PMPriority") * (int)-Math.abs($assignStartTime- $startTime));
+end
+
+rule "AccumulateSetupTime"
+	when
+    	Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+        TimeWindowedJob(previousStandstill != null, ((Float)getSetupDurationFromPreviousStandstill().get("CHANGE_DURATION")).intValue() > 0, $changeDuration : ((Float)getSetupDurationFromPreviousStandstill().get("CHANGE_DURATION")).intValue())
+        //TimeWindowedJob(previousStandstill != null, ((Float)getChangeDuration()).intValue() > 0, $changeDuration : ((Float)getChangeDuration()).intValue())
+    then
+    	scoreHolder.addSoftConstraintMatch(kcontext,
+	    	((Map<String, Integer>)$mapLevel).get("AccumulateSetupTime"), 
+	    	((Map<String, Integer>)$mapWeight).get("AccumulateSetupTime") * -$changeDuration);
+end
+
+
+rule "ChangeLimit"
+	when
+    	$mapParam : Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+    	$mapChange : Map(this["is_change_limit"] != null)  	
+    then
+    	int result = ModulePlannerUtility.calChangeLimit($mapParam, $mapChange);
+    	
+    	if(result < 0){
+			scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("ChangeLimit"), 
+	    	((Map<String, Integer>)$mapWeight).get("ChangeLimit") * result);
+		}
+end
+
+
+rule "OpenLine"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		$mapOpenLine : Map(this["is_open_line"] != null)
+		CFacConstraintCapa(score_item == "open_line", $site : site, $fab : fab, $shiftDate :  ModulePlannerUtility.formatterNoSlash.format(shift_date), $shiftTypeStr : shift, $openLineLimit : item_value)
+	then
+		Map obj = (Map) $mapOpenLine.get($site+"_"+$fab+"_"+$shiftDate+"_"+$shiftTypeStr);
+		if(obj != null){
+			int open_line = ((Integer)obj.get("open_line")).intValue();
+			if($openLineLimit != 0 && open_line > $openLineLimit) {
+				scoreHolder.addSoftConstraintMatch(kcontext, 
+		    	((Map<String, Integer>)$mapLevel).get("OpenLine"), 
+		    	((Map<String, Integer>)$mapWeight).get("OpenLine") * ($openLineLimit - open_line));
+			}
+		}
+end
+
+rule "Limit97"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		SJobDashboardKey(shiftDate != null, $site : site, $fab : fab, $shiftDate : shiftDate, $shift : shift)
+		$commit97 : Number() from accumulate(
+			SJobDashboard(jobType not in ("PM","NON-SCHEDULE") , shiftDate != null, partNo.startsWith("97"), site == $site, fab == $fab, shiftDate.equals($shiftDate), shift == $shift, $qty : forecastQty),
+            sum($qty)
+        );
+		CFacConstraintCapa(score_item =="97_limit", site == $site, fab == $fab, shift_date.equals($shiftDate), shift == $shift, item_value != 0, $commit97.intValue() > item_value, $limit97 : item_value)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("Limit97"), 
+	    	((Map<String, Integer>)$mapWeight).get("Limit97") * ($limit97 - $commit97.intValue()));
+end
+
+rule "Limit91"
+	when
+		Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+		SJobDashboardKey(shiftDate != null, $site : site, $fab : fab, $shiftDate : shiftDate, $shift : shift)
+		$commit91 : Number() from accumulate(
+			SJobDashboard(jobType not in ("PM","NON-SCHEDULE") , shiftDate != null, partNo.startsWith("91"), site == $site, fab == $fab, shiftDate.equals($shiftDate), shift == $shift, $qty : forecastQty),
+            sum($qty)
+        );
+		CFacConstraintCapa(score_item =="91_limit", site == $site, fab == $fab, shift_date.equals($shiftDate), shift == $shift, item_value != 0, $commit91.intValue() > item_value, $limit91 : item_value)
+	then
+		scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("Limit91"), 
+	    	((Map<String, Integer>)$mapWeight).get("Limit91")  * ($limit91 - $commit91.intValue()));
+end
+
+/*//mark by avonchung 20190614
+rule "MinMakespan"
+    when
+        Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])
+        TimeWindowedJob(previousStandstill != null, line != null, nextJob == null, $endTime : endTime)
+    then
+        // Fairness and load balancing trick (see docs): squared to assure correctness in corner cases
+        scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("MinMakespan"), 
+	    	((Map<String, Integer>)$mapWeight).get("MinMakespan") * -(int)$endTime);
+end 
+*/
+
+
+
+rule "DiscontinuousProduction"
+	when
+    	Map(this["is_map_param"] != null, $mapLevel : this["score_level"], $mapWeight : this["score_weight"])        
+        TimeWindowedJob(previousStandstill != null, nextJob != null , jobType not in ("PM","NON-SCHEDULE") , previousStandstill instanceof TimeWindowedJob,
+        ((TimeWindowedJob) previousStandstill).getPartNo() == nextJob.getPartNo() , partNo != nextJob.getPartNo() )
+    then
+    	scoreHolder.addSoftConstraintMatch(kcontext, 
+	    	((Map<String, Integer>)$mapLevel).get("DiscontinuousProduction"), 
+	    	((Map<String, Integer>)$mapWeight).get("DiscontinuousProduction") * -1) ;
+end

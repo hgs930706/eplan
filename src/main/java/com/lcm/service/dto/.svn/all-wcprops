@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/LCM_ePlanner/!svn/ver/692/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/dto
+END
+TJobStatisticsDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/LCM_ePlanner/!svn/ver/686/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/dto/TJobStatisticsDTO.java
+END
+ReportDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/LCM_ePlanner/!svn/ver/692/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/dto/ReportDTO.java
+END
+MenuDTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/LCM_ePlanner/!svn/ver/107/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/service/dto/MenuDTO.java
+END

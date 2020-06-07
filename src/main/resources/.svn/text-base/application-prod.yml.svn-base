@@ -1,0 +1,20 @@
+spring:
+  jpa:
+    database: ORACLE
+    show-sql: false
+    properties:
+        hibernate.default_schema: eplan
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:oracle:thin:@10.5.15.195:1521:s01bhis_1
+    username: EPLAN_AP
+    password: eplanmanager
+    hikari:
+      auto-commit: false
+      data-source-properties:
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
+
+index-url: http://10.6.13.205:3001/

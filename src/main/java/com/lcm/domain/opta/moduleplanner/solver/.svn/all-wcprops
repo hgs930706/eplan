@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/LCM_ePlanner/!svn/ver/763/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/solver
+END
+MovableTaskSelectionFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/LCM_ePlanner/!svn/ver/146/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/solver/MovableTaskSelectionFilter.java
+END
+TaskDifficultyWeightFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/svn/LCM_ePlanner/!svn/ver/763/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/solver/TaskDifficultyWeightFactory.java
+END
+ArrivalTimeUpdatingVariableListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/LCM_ePlanner/!svn/ver/749/LCMePlannerWeb/trunk/ePlanner/src/main/java/com/lcm/domain/opta/moduleplanner/solver/ArrivalTimeUpdatingVariableListener.java
+END

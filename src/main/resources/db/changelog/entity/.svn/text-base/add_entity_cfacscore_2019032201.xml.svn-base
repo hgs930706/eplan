@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="C_FAC_SCORE">
+                <column name="SITE" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="CONSTRAINT_ITEM" type="VARCHAR2(50)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="SCORE_LEVEL" type="NUMBER"></column>
+                <column name="WEIGHT" type="NUMBER"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+                <column name="CONSTRAINT_DESC" type="VARCHAR2(100)"></column>
+                <column name="SCORE_TYPE" type="VARCHAR2(20)"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

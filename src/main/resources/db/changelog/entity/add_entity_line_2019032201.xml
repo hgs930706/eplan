@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="C_FAC_LINE">
+                <column name="SITE" type="VARCHAR2(20)"></column>
+                <column name="FAB" type="VARCHAR2(20)"></column>
+                <column name="AREA" type="VARCHAR2(20)"></column>
+                <column name="LINE" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="ACTIVE_FLAG" type="VARCHAR2(1)" defaultValue="Y"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+                <column name="LINE_TYPE" type="VARCHAR2(20)"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

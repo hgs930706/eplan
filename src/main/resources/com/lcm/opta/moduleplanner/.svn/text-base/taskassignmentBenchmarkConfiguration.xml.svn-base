@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plannerBenchmark>
+  <benchmarkDirectory>local/data/taskassignment</benchmarkDirectory>
+
+	<inheritedSolverBenchmark>
+		<solver>
+			<solutionClass>com.lcm.domain.opta.moduleplanner.domain.TaskAssignmentSolution</solutionClass>
+			<entityClass>com.lcm.domain.opta.moduleplanner.domain.Standstill</entityClass>
+			<entityClass>com.lcm.domain.opta.moduleplanner.domain.Job</entityClass>
+			<entityClass>com.lcm.domain.opta.moduleplanner.domain.TimeWindowedJob</entityClass>
+			<scoreDirectorFactory>
+				<scoreDrl>com/lcm/opta/moduleplanner/taskAssignmentDools.drl</scoreDrl>
+				<initializingScoreTrend>ONLY_DOWN/ONLY_DOWN/ONLY_DOWN</initializingScoreTrend>
+			</scoreDirectorFactory>
+			<termination>
+				<minutesSpentLimit>10</minutesSpentLimit>
+			</termination>
+		</solver>
+	</inheritedSolverBenchmark>
+
+  <solverBenchmark>
+    <name>First Fit Decreasing</name>
+    <solver>
+      <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+      </constructionHeuristic>
+    </solver>
+  </solverBenchmark>
+  <!-- 
+  <solverBenchmark>
+    <name>First Fit</name>
+    <solver>
+      <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+      </constructionHeuristic>
+    </solver>
+  </solverBenchmark>
+  -->
+  <solverBenchmark>
+    <name>Simulated Annealing</name>
+    <solver>
+      <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+      </constructionHeuristic>
+      <localSearch>
+        <acceptor>
+	    	<simulatedAnnealingStartingTemperature>[0]hard/[1000/0]soft</simulatedAnnealingStartingTemperature>
+	    	<entityTabuSize>5</entityTabuSize>
+	    </acceptor>
+	    <forager>
+	        <acceptedCountLimit>4</acceptedCountLimit>
+	    </forager>
+      </localSearch>
+    </solver>
+  </solverBenchmark>
+   <!-- 
+  <solverBenchmark>
+    <name>Late Acceptance</name>
+    <solver>
+      <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+      </constructionHeuristic>
+      <localSearch>
+       
+        <acceptor>
+          <lateAcceptanceSize>400</lateAcceptanceSize>
+        </acceptor>
+        <forager>
+          <acceptedCountLimit>4</acceptedCountLimit>
+        </forager>
+      </localSearch>
+    </solver>
+  </solverBenchmark>
+  -->
+  <solverBenchmark>
+    <name>Tabu Search</name>
+    <solver>
+      <constructionHeuristic>
+        <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+      </constructionHeuristic>
+      <localSearch>
+        <acceptor>
+          <entityTabuSize>5</entityTabuSize>
+        </acceptor>
+        
+        <forager>
+          <acceptedCountLimit>4</acceptedCountLimit>
+        </forager> 
+      </localSearch>
+    </solver>
+  </solverBenchmark>
+ 
+</plannerBenchmark>

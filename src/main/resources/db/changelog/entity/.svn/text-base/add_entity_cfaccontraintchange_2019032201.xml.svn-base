@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+        <changeSet id="1" author="rpy">
+            <createTable tableName="C_FAC_CONSTRAINT_CHANGE">
+                <column name="SITE" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="FAB" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="LINE_TYPE" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="SHIFT" type="VARCHAR2(1)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="DAY" type="DATE">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="HARDSOFT" type="VARCHAR2(20)"></column>
+                <column name="CONSTRAINT_LEVEL" type="NUMBER"></column>
+                <column name="CHANGE_LEVEL" type="VARCHAR2(20)">
+                    <constraints primaryKey="true"></constraints>
+                </column>
+                <column name="CHANGE_LIMIT_CNT" type="NUMBER"></column>
+                <column name="CHANGE_LINE_PROHIBITED" type="VARCHAR2(100)"></column>
+                <column name="ALLOW_CHANGE_TIME" type="VARCHAR2(40)"></column>
+                <column name="LM_USER" type="VARCHAR2(20)"></column>
+                <column name="LM_TIME" type="DATE"></column>
+            </createTable>
+        </changeSet>
+</databaseChangeLog>

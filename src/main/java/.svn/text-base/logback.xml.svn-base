@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_HOME" value="log/" />
+	<property name="CHARSET" value="UTF-8" />
+    <property name="PATTERN" value="%d{HH:mm:ss.SSS} [%-12.12t] %class{0}:%L [%-5p] %m%n" />
+ <!--  <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      %L lowers performance, %C and %c break indentation and therefore reduce readability, normal %t is verbose
+      <pattern>%d{HH:mm:ss.SSS} [%-12.12t] %-5p %m%n</pattern>
+    </encoder>
+  </appender> -->
+  <!-- 控制台輸出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder默認配置為PartternLayoutEncoder    -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+        <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter> -->
+    </appender>
+    <!-- 持續輸出的日誌檔案 -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_HOME}/App.log</file>
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+        <append>false</append>
+        <!-- <filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter> -->
+    </appender>
+  <!-- 按照每天生成日誌文件 -->
+    <appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日誌文件輸出的文件名-->
+            <FileNamePattern>${LOG_HOME}/root-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日誌文件保留天數-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+        <!--日誌文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+  <!-- To override the debug log level from the command line, use the VM option "-Dlogback.level.org.optaplanner=trace" -->
+  <!-- <logger name="org.optaplanner" level="${logback.level.org.optaplanner:-debug}"/> -->
+
+  <!-- <root level="INFO">
+    <appender-ref ref="consoleAppender" />
+    <appender-ref ref="fileAppender" />
+  </root> -->
+  
+  <!-- <logger name="system" level="INFO" additivity="false">
+        <appender-ref ref="SYSTEMROLLINGFILE" />
+    </logger> -->
+    
+    <!-- <logger name="com.lcm" level="DEBUG" additivity="false">  
+	    <appender-ref ref="STDOUT"/>  
+	    <appender-ref ref="ROLLINGFILE"/>
+	    <appender-ref ref="FILE"/>
+  	</logger> -->
+  	
+    <root level="INFO">             
+    	<appender-ref ref="STDOUT"/>  
+	    <appender-ref ref="ROLLINGFILE"/>
+	    <appender-ref ref="FILE"/>
+  	</root>
+    
+    
+
+	<!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
+	<!-- <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+	<logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG" />
+	<logger name="org.hibernate.SQL" level="DEBUG" />
+	<logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
+	<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" /> -->
+</configuration>
