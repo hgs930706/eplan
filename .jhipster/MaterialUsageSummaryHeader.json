@@ -1,0 +1,63 @@
+{
+  "name": "MaterialUsageSummaryHeader",
+  "fields": [
+    {
+      "fieldName": "vendorId",
+      "fieldType": "String",
+      "javadoc": "供应商代码"
+    },
+    {
+      "fieldName": "materialCode",
+      "fieldType": "String",
+      "javadoc": "原材料物料编码"
+    },
+    {
+      "fieldName": "usageDate",
+      "fieldType": "Instant",
+      "javadoc": "汇总用料日期"
+    },
+    {
+      "fieldName": "usageQty",
+      "fieldType": "Integer",
+      "javadoc": "汇总用料数量"
+    },
+    {
+      "fieldName": "sumId",
+      "fieldType": "String",
+      "javadoc": "汇总编码,逗号分割"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200714005409",
+  "javadoc": "物料用料表汇总单头表\\n\\n@author skyline",
+  "entityTableName": "material_usage_summary_header",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

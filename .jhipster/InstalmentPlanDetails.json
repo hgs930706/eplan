@@ -1,0 +1,77 @@
+{
+  "name": "InstalmentPlanDetails",
+  "fields": [
+    {
+      "fieldName": "paymentTerm",
+      "fieldType": "String",
+      "javadoc": "付款方式"
+    },
+    {
+      "fieldName": "paymentDate",
+      "fieldType": "Instant",
+      "javadoc": "预计付款日期"
+    },
+    {
+      "fieldName": "paymentScale",
+      "fieldType": "Double",
+      "javadoc": "付款比例"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal",
+      "javadoc": "预计付款金额,6位小数"
+    },
+    {
+      "fieldName": "bpmNum",
+      "fieldType": "String",
+      "javadoc": "BPM流水号"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "instalmentPlanDetailActual",
+      "otherEntityRelationshipName": "detail",
+      "relationshipName": "actual"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "instalmentPlanHeader",
+      "otherEntityRelationshipName": "detail",
+      "relationshipName": "header",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200714010109",
+  "javadoc": "分期付款单身表\\n\\n@author skyline",
+  "entityTableName": "instalment_plan_details",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

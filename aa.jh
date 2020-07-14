@@ -1,0 +1,830 @@
+application {
+  config {
+    baseName megaframework
+    packageName com.mega.project.srm
+    applicationType monolith
+    authenticationType jwt
+    buildTool maven
+    databaseType sql
+    devDatabaseType mysql
+    prodDatabaseType mysql
+    cacheProvider ehcache
+    jhiPrefix sc
+    entitySuffix false
+    skipClient true
+    skipUserManagement false
+    serverPort 8082
+  }
+    entities *
+}
+
+
+/**
+ * 生产排程状态
+ * @author skyline
+ */
+enum ProductionPlanState {
+    CALCULATING, CALCULATED_DONE
+}
+
+/**
+ * 生产排程单头表
+ *
+ * @author skyline
+ */
+entity ProductionPlanHeader {
+    /**
+     * 生产排程编码
+     */
+    ppCode String,
+    /** 版本号 */
+    ppVersion String,
+    /** 客户代码 */
+    ppCustCode String,
+    /** 客户名称 */
+    ppCustName String,
+    /** 
+    * 状态:
+    * 计算中: CALCULATING
+    * 物料详情：CALCULATED_DONE
+    */
+    ppState ProductionPlanState,
+    /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 生产排程单身表
+ *
+ * @author skyline
+ */
+entity ProductionPlanDetails {
+    /** 成品物料; 机种 */
+    productsCode String,
+    /** 半成品物料; 组件 */
+    semiProductsCode String,
+    /** 半成品数量 */
+    semiProQty Integer,
+	 /** 日期 */
+    semiProDate Instant,
+    /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 物料用料表
+ *
+ * @author skyline
+ */
+entity MaterialUsage {
+     /** 成品物料编码 */
+     productsCode String,
+    /** 原材料编码 */
+    materialCode String,
+    /** 替代原材料编码 */
+    replaceMaterialCode String,
+    /** BOM版本 */
+    bomVersion String,
+    /** BOM编码 */
+    bomNum String,
+    /** 用料日期 */
+    usageDate Instant,
+    /** 原材料用料数量 */
+    usageQty Double,
+    /** 替代料用料数量 */
+    replaceUsageQty Double,
+    /** 实际用料损耗比例 */
+    scale Double,
+    /** 内部编码 */
+    interId String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 物料用料表汇总单头表
+ *
+ * @author skyline
+ */
+entity MaterialUsageSummaryHeader {
+      /** 供应商代码 */
+    vendorId String,
+    /** 原材料物料编码 */
+    materialCode String,
+    /** 汇总用料日期 */
+    usageDate Instant,
+    /** 汇总用料数量 */
+    usageQty Integer,
+    /** 汇总编码,逗号分割 */
+    sumId String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 采购排程状态
+ * @author skyline
+ */
+enum PurchasePlanStatus {
+    CREATE, SEND_OUT
+}
+
+/**
+ * 采购排程信息单头表
+ *
+ * @author skyline
+ */
+entity PurchasePlanHeader {
+    /** 采购排程编码 */
+    purScheCode String,
+    /** 采购排程版本 */
+    purScheVersion String,
+    /** 供应商代码 */
+    vendorCode String,
+    /** 供应商名称 */
+    vendorName String,
+    /** 采购员 */
+    buyer String,
+    /** 类型 */
+    purClass String,
+    /** 送货次数 */
+    deliveryTimes Integer,
+    /** 状态 */
+    status PurchasePlanStatus,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+
+/**
+ * 采购排程数量类型
+ * @author skyline
+ */
+enum PurchasePlanNumClass {
+    PLAN, CONFIRM, ASN, BALANCE
+}
+
+/**
+ * 采购排程信息单身表
+ *
+ * @author skyline
+ */
+entity PurchasePlanDetails {
+    /** 物料代码 */
+    materialCode String,
+    /** 物料名称 */
+    materialName String,
+    /** 出货地址 */
+    shipto String,
+    /** 数量类型 ,PLAN, CONFIRM, ASN, BALANCE */
+    numClass PurchasePlanNumClass,
+    /** 采购日期 */
+    purDate Instant,
+    /** 采购数量 */
+    purQty Double,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+
+
+/**
+ * 库存上传表
+ *
+ * @author skyline
+ */
+entity Inventory {
+    /** 物料编码 */
+    materialCode String,
+    /** 库存数量 */
+    invQty Double,
+    /** 库存单位 */
+    invUnit String,
+    /** 月份 */
+    month String,
+    /** 上传时间 */
+    uploadDate Instant,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 采购订单状态
+ * @author skyline
+ */
+enum PoStates {
+    CLOSE, ACCEPT, RELEASED, SYNCHRO
+}
+
+
+/**
+ * 采购订单单头表
+ *
+ * @author skyline
+ */
+entity PoHeader {
+    /** 采购订单 */
+    poNum String,
+    /** 采购订单版本 */
+    poVersion String,
+    /** 供应商代码 */
+    vendorCode String,
+    /** 供应商名称 */
+    vendorName String,
+    /** 厂区 */
+    plant String,
+    /** 收货地点 */
+    shipTo String,
+    /** 采购订单状态 */
+    poStatus PoStates,
+    /** 采购员 */
+    buyer String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 采购订单单身表
+ *
+ * @author skyline
+ */
+entity PoDetails {
+    /** 订单行项目 */
+    poDetailNum Integer,
+    /** 物料代码 */
+    materialCode String,
+    /** 物料名称 */
+    materialName String,
+    /** 数量 */
+    materialQty Integer,
+    /** 单价 */
+    price BigDecimal,
+    /** 税率 */
+    tax Double,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 生产排程状态
+ * @author skyline
+ */
+enum InstalmentState {
+    PAY_STAGES, PAY_DONE, PAY_DELAY
+}
+
+/**
+ * 分期付款单头表
+ *
+ * @author skyline
+ */
+entity InstalmentPlanHeader {
+   /** 供应商代码 */
+    vendorCode String,
+    /** 供应商名称 */
+    vendorName String,
+    /** 采购订单号 */
+    poNum String,
+    /** 采购人员 */
+    buyer String,
+    /** 
+    * 状态:
+    * PAY_STAGES 分期付款中
+    * PAY_DONE 付款完成
+    * PAY_DELA 付款延期
+    */
+    state String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 分期付款单身表
+ *
+ * @author skyline
+ */
+entity InstalmentPlanDetails {
+ /** 付款方式 */
+      paymentTerm String,
+    /** 预计付款日期 */
+      paymentDate Instant,
+    /** 付款比例 */
+      paymentScale Double,
+    /** 预计付款金额,6位小数 */
+      amount BigDecimal,
+    /** BPM流水号 */
+      bpmNum String,   
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 分期付款单身表，实际付款 
+ *
+ * @author skyline
+ */
+entity InstalmentPlanDetailActual {
+
+    
+    /** 实际付款时间 */
+    actualDate Instant,
+    /** 实际付款金额 */
+    actualAmount BigDecimal, 
+
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+
+
+/**
+ * 物料外部库存设置表
+ *
+ * @author skyline
+ */
+entity OutStockSetup {
+      /** 物料编码 */
+    materialCode String,
+    /** 仓库 */
+    stockCode String,
+    /** 数量 */
+    stockQty Double,
+    /** 日期 */
+    setupDate Instant,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+
+/**
+ * 物料送货周期设置
+ *
+ * @author skyline
+ */
+entity DeliveryCycleSetup {
+      /** 物料类别 */
+     materialClass String,
+    /** 送货周期;一，二，三，四，五 */
+     deliveryCycle String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 物料总控报表基础信息
+ *
+ * @author skyline
+ */
+entity SummaryMaterialReport {
+ /** 成品物料号 */
+     materialCode String,
+    /** 子物料编码 */
+     componentMaterialCode String,
+    /** 子物料名称 */
+     componentMaterialName String,
+    /** 客户物料编码 */
+     customerMaterialCode String,
+    /** 供应商代码 */
+     vendorCode String,
+    /** 交货周期 */
+     shipCycle String,
+    /** 用量 */
+    useQty Double,
+    /** 单位 */
+     unit String,
+    /** 期初库存 */
+    stockQty Double,
+    /** 项目类型 */
+     itemType String,
+    /** 日期 */
+    date Instant,
+    /** 数量 */
+    qty Double,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+
+
+/**
+ * 生产排程单头表(历史记录)
+ *
+ * @author skyline
+ */
+entity ProductionPlanHeaderHis {
+    /** 生产排程编码 */
+    ppCode String,
+    /** 版本号 */
+    ppVersion String,
+    /** 客户代码 */
+    ppCustCode String,
+    /** 客户名称 */
+    ppCustName String,
+    /** 状态 */
+    ppState String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+
+/**
+ * 生产排程单身表(历史记录)
+ *
+ * @author skyline
+ */
+entity ProductionPlanDetailHis {
+    /** 成品物料String机种 */
+    productsCode String,
+    /** 半成品物料String组件 */
+    semiProductsCode String,
+    /** 半成品数量 */
+    semiProQty Integer,
+    /** 日期 */
+    semiProDate Instant,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 采购排程信息单头表(历史记录)
+ *
+ * @author skyline
+ */
+entity PurchasePlanHeaderHis {
+    /** 采购排程编码 */
+    purScheCode String,
+    /** 采购排程版本 */
+    purScheVersion String,
+    /** 供应商代码 */
+    vendorCode String,
+    /** 供应商名称 */
+    vendorName String,
+    /** 采购员 */
+    buyer String,
+    /** 类型 */
+    purClass String,
+    /** 送货次数 */
+    deliveryTimes String,
+    /** 状态 */
+    status String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ * 采购排程信息单身表(历史记录)
+ *
+ * @author skyline
+ */
+entity PurchasePlanDetailHis {
+    /** 物料代码 */
+     materialCode String,
+    /** 物料名称 */
+     materialName String,
+    /** 出货地址 */
+     shipto String,
+    /** 数量类型,P\C\A\B */
+     numClass PurchasePlanNumClass,
+    /** 采购日期 */
+     purDate String,
+    /** 采购数量 */
+     purQty String,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+/**
+ *库存上传表(历史记录)
+ *
+ * @author skyline
+ */
+entity InventoryHis {
+    /** 物料编码 */
+    materialCode String,
+    /** 库存数量 */
+    invQty Double,
+    /** 库存单位 */
+    invUnit String,
+    /** 月份 */
+    month String,
+    /** 上传时间 */
+    uploadDate Instant,
+     /**
+     * 创建者
+     */
+    createdBy String,
+    /**
+     * 创建日期
+     */
+    createdDate Instant,
+    /**
+     * 修改者
+     */
+    lastModifiedBy String,
+    /**
+     * 修改日期
+     */
+    lastModifiedDate Instant
+}
+
+
+relationship OneToMany {
+	/**
+	* 一个生产排程头信息对应多个生产排成明细
+	*/
+  ProductionPlanHeader{detail} to ProductionPlanDetails{header},
+  	/**
+	* 一个历史生产排程头信息对应多个历史生产排成明细
+	*/
+  ProductionPlanHeaderHis{detail} to ProductionPlanDetailHis{header},
+    /**
+	* 一个采购排程头信息对应多个采购排成明细
+	*/
+  PurchasePlanHeader{detail} to PurchasePlanDetails{header}
+    /**
+	* 一个采购排程头信息对应多个采购排成明细
+	*/
+  PurchasePlanHeaderHis{detail} to PurchasePlanDetailHis{header}
+  /**
+   * 一个采购订单头信息对应多个采购订单明细
+   */
+  PoHeader{detail} to PoDetails{header}
+  /**
+   * 一个分期付款单头对应多个分期付款明细
+   */
+  InstalmentPlanHeader{detail} to InstalmentPlanDetails{header}
+  
+  InstalmentPlanDetails{actual} to InstalmentPlanDetailActual{detail}
+}
+
+
+paginate * with pagination
+
+
+

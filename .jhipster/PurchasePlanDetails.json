@@ -1,0 +1,77 @@
+{
+  "name": "PurchasePlanDetails",
+  "fields": [
+    {
+      "fieldName": "materialCode",
+      "fieldType": "String",
+      "javadoc": "物料代码"
+    },
+    {
+      "fieldName": "materialName",
+      "fieldType": "String",
+      "javadoc": "物料名称"
+    },
+    {
+      "fieldName": "shipto",
+      "fieldType": "String",
+      "javadoc": "出货地址"
+    },
+    {
+      "fieldName": "numClass",
+      "fieldType": "PurchasePlanNumClass",
+      "javadoc": "数量类型 ,PLAN, CONFIRM, ASN, BALANCE",
+      "fieldValues": "PLAN,CONFIRM,ASN,BALANCE"
+    },
+    {
+      "fieldName": "purDate",
+      "fieldType": "Instant",
+      "javadoc": "采购日期"
+    },
+    {
+      "fieldName": "purQty",
+      "fieldType": "Double",
+      "javadoc": "采购数量"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "purchasePlanHeader",
+      "otherEntityRelationshipName": "detail",
+      "relationshipName": "header",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200714005609",
+  "javadoc": "采购排程信息单身表\\n\\n@author skyline",
+  "entityTableName": "purchase_plan_details",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

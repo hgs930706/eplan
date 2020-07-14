@@ -1,0 +1,76 @@
+{
+  "name": "PoDetails",
+  "fields": [
+    {
+      "fieldName": "poDetailNum",
+      "fieldType": "Integer",
+      "javadoc": "订单行项目"
+    },
+    {
+      "fieldName": "materialCode",
+      "fieldType": "String",
+      "javadoc": "物料代码"
+    },
+    {
+      "fieldName": "materialName",
+      "fieldType": "String",
+      "javadoc": "物料名称"
+    },
+    {
+      "fieldName": "materialQty",
+      "fieldType": "Integer",
+      "javadoc": "数量"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "javadoc": "单价"
+    },
+    {
+      "fieldName": "tax",
+      "fieldType": "Double",
+      "javadoc": "税率"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "poHeader",
+      "otherEntityRelationshipName": "detail",
+      "relationshipName": "header",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200714005909",
+  "javadoc": "采购订单单身表\\n\\n@author skyline",
+  "entityTableName": "po_details",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

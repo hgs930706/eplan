@@ -1,0 +1,88 @@
+{
+  "name": "MaterialUsage",
+  "fields": [
+    {
+      "fieldName": "productsCode",
+      "fieldType": "String",
+      "javadoc": "成品物料编码"
+    },
+    {
+      "fieldName": "materialCode",
+      "fieldType": "String",
+      "javadoc": "原材料编码"
+    },
+    {
+      "fieldName": "replaceMaterialCode",
+      "fieldType": "String",
+      "javadoc": "替代原材料编码"
+    },
+    {
+      "fieldName": "bomVersion",
+      "fieldType": "String",
+      "javadoc": "BOM版本"
+    },
+    {
+      "fieldName": "bomNum",
+      "fieldType": "String",
+      "javadoc": "BOM编码"
+    },
+    {
+      "fieldName": "usageDate",
+      "fieldType": "Instant",
+      "javadoc": "用料日期"
+    },
+    {
+      "fieldName": "usageQty",
+      "fieldType": "Double",
+      "javadoc": "原材料用料数量"
+    },
+    {
+      "fieldName": "replaceUsageQty",
+      "fieldType": "Double",
+      "javadoc": "替代料用料数量"
+    },
+    {
+      "fieldName": "scale",
+      "fieldType": "Double",
+      "javadoc": "实际用料损耗比例"
+    },
+    {
+      "fieldName": "interId",
+      "fieldType": "String",
+      "javadoc": "内部编码"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200714005309",
+  "javadoc": "物料用料表\\n\\n@author skyline",
+  "entityTableName": "material_usage",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

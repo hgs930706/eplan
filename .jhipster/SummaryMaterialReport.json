@@ -1,0 +1,98 @@
+{
+  "name": "SummaryMaterialReport",
+  "fields": [
+    {
+      "fieldName": "materialCode",
+      "fieldType": "String",
+      "javadoc": "成品物料号"
+    },
+    {
+      "fieldName": "componentMaterialCode",
+      "fieldType": "String",
+      "javadoc": "子物料编码"
+    },
+    {
+      "fieldName": "componentMaterialName",
+      "fieldType": "String",
+      "javadoc": "子物料名称"
+    },
+    {
+      "fieldName": "customerMaterialCode",
+      "fieldType": "String",
+      "javadoc": "客户物料编码"
+    },
+    {
+      "fieldName": "vendorCode",
+      "fieldType": "String",
+      "javadoc": "供应商代码"
+    },
+    {
+      "fieldName": "shipCycle",
+      "fieldType": "String",
+      "javadoc": "交货周期"
+    },
+    {
+      "fieldName": "useQty",
+      "fieldType": "Double",
+      "javadoc": "用量"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String",
+      "javadoc": "单位"
+    },
+    {
+      "fieldName": "stockQty",
+      "fieldType": "Double",
+      "javadoc": "期初库存"
+    },
+    {
+      "fieldName": "itemType",
+      "fieldType": "String",
+      "javadoc": "项目类型"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "javadoc": "日期"
+    },
+    {
+      "fieldName": "qty",
+      "fieldType": "Double",
+      "javadoc": "数量"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200714010509",
+  "javadoc": "物料总控报表基础信息\\n\\n@author skyline",
+  "entityTableName": "summary_material_report",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

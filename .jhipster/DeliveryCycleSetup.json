@@ -1,0 +1,48 @@
+{
+  "name": "DeliveryCycleSetup",
+  "fields": [
+    {
+      "fieldName": "materialClass",
+      "fieldType": "String",
+      "javadoc": "物料类别"
+    },
+    {
+      "fieldName": "deliveryCycle",
+      "fieldType": "String",
+      "javadoc": "送货周期;一，二，三，四，五"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200714010409",
+  "javadoc": "物料送货周期设置\\n\\n@author skyline",
+  "entityTableName": "delivery_cycle_setup",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "ProductionPlanHeaderHis",
+  "fields": [
+    {
+      "fieldName": "ppCode",
+      "fieldType": "String",
+      "javadoc": "生产排程编码"
+    },
+    {
+      "fieldName": "ppVersion",
+      "fieldType": "String",
+      "javadoc": "版本号"
+    },
+    {
+      "fieldName": "ppCustCode",
+      "fieldType": "String",
+      "javadoc": "客户代码"
+    },
+    {
+      "fieldName": "ppCustName",
+      "fieldType": "String",
+      "javadoc": "客户名称"
+    },
+    {
+      "fieldName": "ppState",
+      "fieldType": "String",
+      "javadoc": "状态"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productionPlanDetailHis",
+      "otherEntityRelationshipName": "header",
+      "javadoc": "一个历史生产排程头信息对应多个历史生产排成明细",
+      "relationshipName": "detail"
+    }
+  ],
+  "changelogDate": "20200714010609",
+  "javadoc": "生产排程单头表(历史记录)\\n\\n@author skyline",
+  "entityTableName": "production_plan_header_his",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}
