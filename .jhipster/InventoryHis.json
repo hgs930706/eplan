@@ -1,0 +1,63 @@
+{
+  "name": "InventoryHis",
+  "fields": [
+    {
+      "fieldName": "materialCode",
+      "fieldType": "String",
+      "javadoc": "物料编码"
+    },
+    {
+      "fieldName": "invQty",
+      "fieldType": "Double",
+      "javadoc": "库存数量"
+    },
+    {
+      "fieldName": "invUnit",
+      "fieldType": "String",
+      "javadoc": "库存单位"
+    },
+    {
+      "fieldName": "month",
+      "fieldType": "String",
+      "javadoc": "月份"
+    },
+    {
+      "fieldName": "uploadDate",
+      "fieldType": "Instant",
+      "javadoc": "上传时间"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200714011009",
+  "javadoc": "库存上传表(历史记录)\\n\\n@author skyline",
+  "entityTableName": "inventory_his",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

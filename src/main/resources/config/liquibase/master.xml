@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql, mariadb"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
+    <property name="clobType" value="clob" dbms="h2"/>
+    <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
+    <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005109_added_entity_ProductionPlanHeader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005209_added_entity_ProductionPlanDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005309_added_entity_MaterialUsage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005409_added_entity_MaterialUsageSummaryHeader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005509_added_entity_PurchasePlanHeader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005609_added_entity_PurchasePlanDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005709_added_entity_Inventory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005809_added_entity_PoHeader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005909_added_entity_PoDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010009_added_entity_InstalmentPlanHeader.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010109_added_entity_InstalmentPlanDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010209_added_entity_InstalmentPlanDetailActual.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010309_added_entity_OutStockSetup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010409_added_entity_DeliveryCycleSetup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010509_added_entity_SummaryMaterialReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010609_added_entity_ProductionPlanHeaderHis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010709_added_entity_ProductionPlanDetailHis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010809_added_entity_PurchasePlanHeaderHis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010909_added_entity_PurchasePlanDetailHis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714011009_added_entity_InventoryHis.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200714005209_added_entity_constraints_ProductionPlanDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005609_added_entity_constraints_PurchasePlanDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714005909_added_entity_constraints_PoDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010109_added_entity_constraints_InstalmentPlanDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010209_added_entity_constraints_InstalmentPlanDetailActual.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010709_added_entity_constraints_ProductionPlanDetailHis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200714010909_added_entity_constraints_PurchasePlanDetailHis.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

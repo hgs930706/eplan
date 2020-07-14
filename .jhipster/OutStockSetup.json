@@ -1,0 +1,58 @@
+{
+  "name": "OutStockSetup",
+  "fields": [
+    {
+      "fieldName": "materialCode",
+      "fieldType": "String",
+      "javadoc": "物料编码"
+    },
+    {
+      "fieldName": "stockCode",
+      "fieldType": "String",
+      "javadoc": "仓库"
+    },
+    {
+      "fieldName": "stockQty",
+      "fieldType": "Double",
+      "javadoc": "数量"
+    },
+    {
+      "fieldName": "setupDate",
+      "fieldType": "Instant",
+      "javadoc": "日期"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200714010309",
+  "javadoc": "物料外部库存设置表\\n\\n@author skyline",
+  "entityTableName": "out_stock_setup",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}

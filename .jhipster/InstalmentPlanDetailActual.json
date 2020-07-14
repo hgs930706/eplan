@@ -1,0 +1,56 @@
+{
+  "name": "InstalmentPlanDetailActual",
+  "fields": [
+    {
+      "fieldName": "actualDate",
+      "fieldType": "Instant",
+      "javadoc": "实际付款时间"
+    },
+    {
+      "fieldName": "actualAmount",
+      "fieldType": "BigDecimal",
+      "javadoc": "实际付款金额"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "javadoc": "创建者"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "javadoc": "创建日期"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "javadoc": "修改者"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant",
+      "javadoc": "修改日期"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "instalmentPlanDetails",
+      "otherEntityRelationshipName": "actual",
+      "relationshipName": "detail",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200714010209",
+  "javadoc": "分期付款单身表，实际付款\\n\\n@author skyline",
+  "entityTableName": "instalment_plan_detail_actual",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": ["megaframework"]
+}
